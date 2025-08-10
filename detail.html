@@ -96,13 +96,14 @@
                 <img src="${anime.gambar}" alt="${anime.judul}" onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
                 <div class="detail-info">
                     <h2>${anime.judul}</h2>
+                    <p><strong>Information:</strong></p>
                     <p><strong>Type:</strong> ${anime.type}</p>
                     <p><strong>Tahun:</strong> ${anime.tahun}</p>
                     <p><strong>Status:</strong> ${anime.status}</p>
                     <p><strong>Episode:</strong> ${anime.episode}</p>
                     <p><strong>Rating:</strong> ${anime.rating}</p>
                     <p><strong>Sinopsis:</strong></p>
-                    <p>${anime.sinopsis}</p>
+                    <p style="text-align: justify;">${anime.sinopsis}</p>
                     <button onclick="editAnime()" class="btn btn-primary">Edit</button>
                     <button onclick="deleteAnime()" class="btn btn-danger">Hapus</button>
                 </div>

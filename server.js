@@ -37,23 +37,17 @@ app.get("/anime", (req, res) => {
 });
 
 // Ambil anime berdasarkan id
+// Ambil anime berdasarkan id - FIXED VERSION
 app.get("/anime/:id", (req, res) => {
-  fs.readFile(DATA_FILE, "utf8", (err, data) => {
+  readData((err, jsonData) => {
     if (err) return res.status(500).json({ error: "Gagal membaca data" });
 
-    let jsonData = JSON.parse(data || "{}");
-    let animeList = jsonData.anime || [];
-
-    console.log("Anime List:", animeList);
-    console.log("Mencari id:", req.params.id, "tipe:", typeof req.params.id);
+    const animeList = jsonData.anime;
+    const requestedId = req.params.id;
 
     const anime = animeList.find((a) => {
-      console.log(
-        `Bandingkan a.id (${a.id}, tipe ${typeof a.id}) dengan req.params.id (${
-          req.params.id
-        }, tipe ${typeof req.params.id})`
-      );
-      return a.id == req.params.id;
+      // ✅ Handle both string and number comparison
+      return a.id == requestedId || a.id === parseInt(requestedId);
     });
 
     if (!anime) return res.status(404).json({ error: "Anime tidak ditemukan" });

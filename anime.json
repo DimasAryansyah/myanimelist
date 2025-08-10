@@ -1,15 +1,26 @@
 {
   "anime": [
     {
-      "id": "2",
-      "judul": "Jigokuraku Season 2",
+      "id": "1",
+      "judul": "One Piece",
       "type": "TV",
-      "tahun": "01 Januari 2026",
-      "status": "Plan to Watch",
-      "episode": "12",
+      "tahun": "20 Oktober 1999",
+      "status": "Watching",
+      "episode": "0",
+      "rating": 1,
+      "sinopsis": "Setelah nyaris selamat di dalam tong setelah melewati pusaran air mengerikan di laut, Monkey D. Luffy yang riang berakhir di atas kapal yang diserang bajak laut yang menakutkan. Meskipun tampak naif, ia tak bisa diremehkan. Tak tertandingi dalam pertempuran, Luffy sendiri adalah seorang bajak laut yang gigih mengejar harta karun One Piece yang didambakan dan gelar Raja Bajak Laut yang menyertainya.\n\nMendiang Raja Bajak Laut, Gol D. Roger, menggemparkan dunia sebelum kematiannya dengan mengungkapkan keberadaan timbunan kekayaannya dan menantang semua orang untuk mendapatkannya. Sejak saat itu, banyak bajak laut kuat telah mengarungi lautan berbahaya demi One Piece yang berharga, tetapi tak pernah kembali. Meskipun Luffy tidak memiliki kru dan kapal yang layak, ia diberkahi dengan kemampuan manusia super dan semangat pantang menyerah yang menjadikannya bukan hanya musuh yang tangguh, tetapi juga inspirasi bagi banyak orang.\n\nSaat ia menghadapi berbagai tantangan dengan senyum lebar di wajahnya, Luffy mengumpulkan teman-teman yang unik untuk bergabung dengannya dalam usahanya yang ambisius, bersama-sama menghadapi bahaya dan keajaiban dalam petualangan sekali seumur hidup mereka.",
+      "gambar": "https://cdn.myanimelist.net/images/anime/1244/138851.jpg"
+    },
+    {
+      "id": "2",
+      "judul": "Naruto: Shippuuden",
+      "type": "TV",
+      "tahun": "15 Februari 2007",
+      "status": "Complete",
+      "episode": "500",
       "rating": 10,
-      "sinopsis": "oke",
-      "gambar": "https://cdn.myanimelist.net/images/anime/1500/140418.webp"
+      "sinopsis": "Sudah dua setengah tahun sejak Naruto Uzumaki meninggalkan Konohagakure, Desa Daun Tersembunyi, untuk latihan intensif menyusul berbagai peristiwa yang memicu hasratnya untuk menjadi lebih kuat. Kini, Akatsuki, organisasi misterius ninja pemberontak elit, semakin dekat dengan rencana besar mereka yang mungkin mengancam keselamatan seluruh dunia shinobi.\n\nMeskipun Naruto sudah dewasa dan berbagai peristiwa mengerikan membayangi, kepribadiannya tak banyak berubah—masih riuh dan kekanak-kanakan—meskipun kini ia jauh lebih percaya diri dan memiliki tekad yang lebih besar untuk melindungi teman-teman dan rumahnya. Apa pun yang terjadi, Naruto akan terus berjuang demi apa yang penting baginya, bahkan dengan mengorbankan tubuhnya sendiri, dalam kelanjutan kisah tentang seorang anak laki-laki yang ingin menjadi Hokage.",
+      "gambar": "https://cdn.myanimelist.net/images/anime/1565/111305.jpg"
     }
   ]
 }
