@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime Detail</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+
+  <body>
+    <nav class="navbar bg-primary">
+      <h1>Anime Detail</h1>
+      <a href="index.html" class="add-btn">Kembali</a>
+    </nav>
+
+    <section id="animeDetail" class="detail-section"></section>
+
+    <!-- Modal Edit -->
+    <div id="animeModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Edit Anime</h2>
+        <form id="animeForm">
+          <input type="hidden" id="animeId" />
+          <input type="text" id="judul" required />
+          <select id="type" required>
+            <option value="TV">TV</option>
+            <option value="Movie">Movie</option>
+          </select>
+          <input
+            type="text"
+            id="tahun"
+            placeholder="Tahun atau Tanggal Rilis"
+            required
+          />
+          <select id="status" required>
+            <option value="Watching">Watching</option>
+            <option value="Plan to Watch">Plan to Watch</option>
+            <option value="Complete">Complete</option>
+          </select>
+          <input type="number" id="episode" required />
+          <input type="number" id="rating" min="1" max="10" required />
+          <textarea id="sinopsis" required></textarea>
+          <input type="url" id="gambar" required />
+          <div class="modal-buttons">
+            <button type="submit">Simpan</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const animeId = params.get("id");
+
+      let anime = null; // variabel global untuk data anime
+
+      console.log("Anime ID dari URL:", animeId); // Debug log
+
+      if (!animeId) {
+        document.getElementById("animeDetail").innerHTML =
+          "<p>ID anime tidak ditemukan di URL.</p>";
+      } else {
+        console.log(
+          "Fetching data dari:",
+          `http://localhost:3000/anime/${animeId}`
+        ); // Debug log
+
+        fetch(`http://localhost:3000/anime/${animeId}`)
+          .then((response) => {
+            console.log("Response status:", response.status); // Debug log
+            if (!response.ok)
+              throw new Error(`HTTP ${response.status}: Anime tidak ditemukan`);
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Data diterima:", data); // Debug log
+            anime = data; // simpan ke variabel global
+            document.getElementById("animeDetail").innerHTML = `
+                <img src="${anime.gambar}" alt="${anime.judul}" onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
+                <div class="detail-info">
+                    <h2>${anime.judul}</h2>
+                    <p><strong>Type:</strong> ${anime.type}</p>
+                    <p><strong>Tahun:</strong> ${anime.tahun}</p>
+                    <p><strong>Status:</strong> ${anime.status}</p>
+                    <p><strong>Episode:</strong> ${anime.episode}</p>
+                    <p><strong>Rating:</strong> ${anime.rating}</p>
+                    <p><strong>Sinopsis:</strong></p>
+                    <p>${anime.sinopsis}</p>
+                    <button onclick="editAnime()" class="btn btn-primary">Edit</button>
+                    <button onclick="deleteAnime()" class="btn btn-danger">Hapus</button>
+                </div>
+            `;
+          })
+          .catch((error) => {
+            console.error("Error:", error); // Debug log
+            document.getElementById("animeDetail").innerHTML = `
+                <div class="alert alert-danger">
+                    <h4>Error!</h4>
+                    <p>${error.message}</p>
+                    <p>Pastikan:</p>
+                    <ul>
+                        <li>Server backend sudah berjalan di http://localhost:3000</li>
+                        <li>Data anime dengan ID ${animeId} ada di database</li>
+                        <li>Tidak ada masalah koneksi network</li>
+                    </ul>
+                </div>
+            `;
+          });
+      }
+
+      function openModal() {
+        document.getElementById("animeModal").style.display = "block";
+        document.getElementById("animeId").value = anime.id;
+        document.getElementById("judul").value = anime.judul;
+        document.getElementById("type").value = anime.type;
+        document.getElementById("tahun").value = anime.tahun;
+        document.getElementById("status").value = anime.status;
+        document.getElementById("episode").value = anime.episode;
+        document.getElementById("rating").value = anime.rating;
+        document.getElementById("sinopsis").value = anime.sinopsis;
+        document.getElementById("gambar").value = anime.gambar;
+      }
+
+      function closeModal() {
+        document.getElementById("animeModal").style.display = "none";
+      }
+
+      function editAnime() {
+        openModal();
+      }
+
+      document
+        .getElementById("animeForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const updated = {
+            id: document.getElementById("animeId").value,
+            judul: document.getElementById("judul").value,
+            type: document.getElementById("type").value,
+            tahun: document.getElementById("tahun").value,
+            status: document.getElementById("status").value,
+            episode: document.getElementById("episode").value,
+            rating: parseFloat(document.getElementById("rating").value),
+            sinopsis: document.getElementById("sinopsis").value,
+            gambar: document.getElementById("gambar").value,
+          };
+
+          fetch(`http://localhost:3000/anime/${updated.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updated),
+          })
+            .then((res) => {
+              if (!res.ok) throw new Error("Gagal update data");
+              return res.json();
+            })
+            .then((data) => {
+              anime = data; // update anime global
+              Swal.fire({
+                icon: "success",
+                title: "Berhasil!",
+                text: "Anime berhasil diperbarui",
+                timer: 2000,
+                showConfirmButton: false,
+              }).then(() => {
+                location.reload();
+              });
+            })
+            .catch((err) => {
+              Swal.fire("Error", err.message, "error");
+            });
+        });
+
+      function deleteAnime() {
+        Swal.fire({
+          title: "Yakin ingin menghapus?",
+          text: "Data anime akan dihapus permanen!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Ya, hapus!",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`http://localhost:3000/anime/${anime.id}`, {
+              method: "DELETE",
+            })
+              .then((res) => {
+                if (!res.ok) throw new Error("Gagal menghapus data");
+                Swal.fire({
+                  icon: "success",
+                  title: "Dihapus!",
+                  text: "Anime berhasil dihapus.",
+                  timer: 2000,
+                  showConfirmButton: false,
+                }).then(() => {
+                  window.location.href = "index.html";
+                });
+              })
+              .catch((err) => {
+                Swal.fire("Error", err.message, "error");
+              });
+          }
+        });
+      }
+
+      // Tutup modal kalau klik luar
+      window.onclick = function (event) {
+        const modal = document.getElementById("animeModal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

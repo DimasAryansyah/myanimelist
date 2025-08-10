@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f8f8f8;
+}
+
+.navbar {
+    position: relative;
+}
+
+.navbar h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+nav {
+  background: #222;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin-left: 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.card-container {
+  max-width: 1200px; /* Batas lebar biar nggak terlalu melebar di layar besar */
+  margin: 10px auto; /* Tengah secara horizontal */
+  padding: 20px; /* Jarak dari pinggir */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.filter-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Biar responsif di layar kecil */
+}
+
+.filter-search select,
+.filter-search input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: white;
+  color: black;
+  font-size: 14px;
+}
+
+.anime-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.anime-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.anime-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover; /* Biar proporsional dan tidak gepeng */
+  border-radius: 8px;
+  image-rendering: auto; /* biar tetap halus */
+}
+
+.anime-card .title-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.add-btn {
+  background: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.add-btn:hover {
+  background: #218838;
+}
+
+/* Modal background */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #222;
+  color: white;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Close button */
+.close {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Form rapi ke bawah */
+#animeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Jarak antar field */
+}
+
+#animeForm input,
+#animeForm select,
+#animeForm textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+}
+
+#animeForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Tombol simpan & batal */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+.detail-section {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  max-width: 900px;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.detail-section img {
+  max-width: 300px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-info h2 {
+  margin-bottom: 10px;
+}
+
+.detail-info p {
+  margin: 5px 0;
+}
+
+.detail-info button {
+  padding: 8px 16px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detail-info button:first-of-type {
+  background-color: #4caf50;
+  color: white;
+}
+
+.detail-info button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
