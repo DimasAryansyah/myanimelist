@@ -67,7 +67,7 @@ document.getElementById("animeForm").addEventListener("submit", function (e) {
   const newId =
     animeList.length === 0 ? 1 : Math.max(...animeList.map((a) => a.id)) + 1;
   const anime = {
-    id: Number(document.getElementById("animeId").value) || newId,
+    id: String(document.getElementById("animeId").value) || newId,
     judul: document.getElementById("judul").value,
     type: document.getElementById("type").value,
     tahun: document.getElementById("tahun").value,
@@ -106,7 +106,7 @@ function showCategory(category) {
   let filtered = animeList;
 
   if (category === "home") {
-    filtered = [...animeList].sort((a, b) => b.rating - a.rating).slice(0, 5);
+    filtered = [...animeList].sort((a, b) => b.rating - a.rating);
   } else if (category === "Watching") {
     filtered = animeList.filter((a) => a.status === "Watching");
   } else if (category === "Plan to Watch") {
@@ -166,6 +166,12 @@ function applyFilter() {
     filtered = filtered.filter((a) => a.type === "TV");
   } else if (value === "movie") {
     filtered = filtered.filter((a) => a.type === "Movie");
+  } else if (value === "ova") {
+    filtered = filtered.filter((a) => a.type === "OVA");
+  } else if (value === "ona") {
+    filtered = filtered.filter((a) => a.type === "ONA");
+  } else if (value === "special") {
+    filtered = filtered.filter((a) => a.type === "Special");
   } else if (value === "tahun") {
     filtered.sort((a, b) => {
       const yearA = parseInt((a.tahun.match(/\d{4}/) || [0])[0]);

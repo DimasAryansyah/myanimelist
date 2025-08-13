@@ -41,6 +41,9 @@
           <select id="type" required>
             <option value="TV">TV</option>
             <option value="Movie">Movie</option>
+            <option value="OVA">OVA</option>
+            <option value="ONA">ONA</option>
+            <option value="SpeciaL">Special</option>
           </select>
           <input
             type="text"
@@ -98,6 +101,7 @@
                     <h2>${anime.judul}</h2>
                     <p><strong>Information:</strong></p>
                     <p><strong>Type:</strong> ${anime.type}</p>
+                    <p><strong>Country:</strong> ${anime.country}</p>
                     <p><strong>Tahun:</strong> ${anime.tahun}</p>
                     <p><strong>Status:</strong> ${anime.status}</p>
                     <p><strong>Episode:</strong> ${anime.episode}</p>
@@ -152,7 +156,7 @@
         .addEventListener("submit", function (e) {
           e.preventDefault();
           const updated = {
-            id: document.getElementById("animeId").value,
+            id: String(document.getElementById("animeId").value),
             judul: document.getElementById("judul").value,
             type: document.getElementById("type").value,
             tahun: document.getElementById("tahun").value,
